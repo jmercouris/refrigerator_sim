@@ -1,13 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.iit.refrigeratorsimulator;
 
-/**
- *
- * @author jmercouris
- */
 public class Store {
     
+    ////////////////////////////////////////////////////////////////////////////
+    // Sell Water Filter
+    ////////////////////////////////////////////////////////////////////////////
+    public static WaterFilter sellWaterFilter (int inputMoney)
+    {
+        if (inputMoney > Prices.WATER_FILTER_COST)
+        {
+            return new WaterFilter();
+        } 
+       return null; 
+    }
 }
