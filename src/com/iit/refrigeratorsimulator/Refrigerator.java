@@ -6,10 +6,35 @@ package com.iit.refrigeratorsimulator;
 
 /**
  *
- * @author jmercouris
+ * @author jmercouris, hkim
  */
 public class Refrigerator {
+    private final int NUM_FOOD = 4;
+    float [] quantStat = new float [6];
+    
+    Food apple = new Apple();
+    Food oj = new OrangeJuice();
+    Food egg = new Egg();
+    Food milk = new Milk();
+    
     WaterFilter waterFilter;
+    
+    
+    public String [] getQuantity(){
+        String [] display = new String [NUM_FOOD]; 
+        
+        display[0] = Integer.toString((int)apple.getQuantity());
+        display[1] = Float.toString(oj.getQuantity());
+        display[2] = Integer.toString((int)egg.getQuantity());
+        display[3] = Float.toString(milk.getQuantity());
+        
+        return display;
+    }
+    
+    
+    
+    
+    
     ////////////////////////////////////////////////////////////////////////////
     // Update Status
     ////////////////////////////////////////////////////////////////////////////
@@ -18,8 +43,20 @@ public class Refrigerator {
         
         // Update UI
         
+        
         // Check Foods
         
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // Consume Food
+    // Take food id as a parameter.
+    // Decrement the food of the id.
+    // return calories of the food to the user.
+    
+    public int consumeFood(int id){
+        
+        return 0;
     }
     
     ////////////////////////////////////////////////////////////////////////////

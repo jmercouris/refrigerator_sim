@@ -6,7 +6,7 @@ package com.iit.refrigeratorsimulator;
 
 /**
  *
- * @author jmercouris
+ * @author jmercouris, hkim
  */
 public class User {
 
