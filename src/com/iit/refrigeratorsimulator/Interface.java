@@ -4,7 +4,7 @@ public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     // Main Method
     ////////////////////////////////////////////////////////////////////////////
-    User user = new User();
+    
     Refrigerator refrigerator = new Refrigerator();
     Store store = new Store();
     
@@ -31,6 +31,9 @@ public class Interface extends javax.swing.JFrame {
         });
     }
  
+    public void statusBarPerformed(){
+        jProgressBar1.setValue(refrigerator.user.getHunger());
+    }
     
     
     
@@ -88,8 +91,9 @@ public class Interface extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        time_value = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -335,16 +339,26 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel9.setText("2045.00$");
 
+        jProgressBar1.setValue(80);
+        jProgressBar1.setStringPainted(true);
+        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jProgressBar1StateChanged(evt);
+            }
+        });
+
         jLabel10.setText("Time:");
 
-        jLabel11.setText("Day 23");
+        time_value.setText("Day 90");
 
-        jButton6.setText("6 Hours");
+        jButton6.setText("1 Day");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
+
+        jLabel11.setText("Turn:");
 
         org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -354,11 +368,13 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jLabel6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jLabel11)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jLabel10)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel11)
+                .add(time_value)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jLabel7)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -380,8 +396,9 @@ public class Interface extends javax.swing.JFrame {
                         .add(jLabel8)
                         .add(jLabel9)
                         .add(jLabel10)
-                        .add(jLabel11)
-                        .add(jButton6))
+                        .add(time_value)
+                        .add(jButton6)
+                        .add(jLabel11))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jProgressBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -476,11 +493,13 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_eat_appleActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        refrigerator.decTime();
+        this.time_value.setText("Day "+Integer.toString(refrigerator.time));
+        statusBarPerformed();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void buy_waterfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_waterfilterActionPerformed
-        user.buyWaterFilter();
+        refrigerator.buyWaterFilter();
     }//GEN-LAST:event_buy_waterfilterActionPerformed
 
     private void buy_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_ojActionPerformed
@@ -516,6 +535,10 @@ public class Interface extends javax.swing.JFrame {
         ((Milk) refrigerator.milk).drinkMilk();
         quantityUpdate();
     }//GEN-LAST:event_drink_milkActionPerformed
+
+    private void jProgressBar1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar1StateChanged
+        jProgressBar1.setValue(refrigerator.user.getHunger());
+    }//GEN-LAST:event_jProgressBar1StateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apple_quantity;
@@ -561,5 +584,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel milk_unit;
     private javax.swing.JLabel oj_quantity;
     private javax.swing.JLabel oj_unit;
+    private javax.swing.JLabel time_value;
     // End of variables declaration//GEN-END:variables
 }

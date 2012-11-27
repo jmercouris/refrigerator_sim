@@ -11,12 +11,26 @@ package com.iit.refrigeratorsimulator;
 public class User {
 
     private float money = 2500;
-    private int hunger = 0;
+    private int hunger = 80;
     private int thirst = 0;
     private Refrigerator refrigerator;
 
     User() {
-        refrigerator = new Refrigerator();
+        
+    }
+    
+    public int getHunger(){
+        return hunger;
+    }
+    
+    public void incHunger(int calorie)
+    {
+        hunger += calorie;
+    }
+    
+    public void decHunger()
+    {
+        hunger -= 20;
         
     }
 

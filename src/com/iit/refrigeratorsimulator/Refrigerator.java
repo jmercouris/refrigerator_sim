@@ -10,7 +10,10 @@ package com.iit.refrigeratorsimulator;
  */
 public class Refrigerator {
     private final int NUM_FOOD = 4;
+    public int time = 90;
     float [] quantStat = new float [6];
+    
+    User user = new User();
     
     Food apple = new Apple();
     Food oj = new OrangeJuice();
@@ -31,7 +34,10 @@ public class Refrigerator {
         return display;
     }
     
-    
+    public void decTime(){
+        time -= 1;
+        user.decHunger();
+    }
     
     
     
@@ -57,6 +63,10 @@ public class Refrigerator {
     public int consumeFood(int id){
         
         return 0;
+    }
+    
+    public void buyWaterFilter(){
+        
     }
     
     ////////////////////////////////////////////////////////////////////////////
