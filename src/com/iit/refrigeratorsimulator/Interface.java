@@ -7,13 +7,13 @@ public class Interface extends javax.swing.JFrame {
     
     Refrigerator refrigerator = new Refrigerator();
     Store store = new Store();
-    
+    String [] quantity = refrigerator.getQuantity();
     
     
     
     
     public void quantityUpdate(){
-        String [] quantity = refrigerator.getQuantity();
+        quantity = refrigerator.getQuantity();
         this.apple_quantity.setText(quantity[0]);
         this.oj_quantity.setText(quantity[1]);
         this.egg_quantity.setText(quantity[2]);
@@ -489,7 +489,10 @@ public class Interface extends javax.swing.JFrame {
 
     private void eat_appleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_appleActionPerformed
         ((Apple) refrigerator.apple).eatApple();
+        if (Integer.parseInt(quantity[0]) > 0)
+            refrigerator.user.incHunger(5);
         quantityUpdate();
+        jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_eat_appleActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -505,11 +508,15 @@ public class Interface extends javax.swing.JFrame {
     private void buy_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_ojActionPerformed
         ((OrangeJuice) refrigerator.oj).buyOJ();
         quantityUpdate();
+
     }//GEN-LAST:event_buy_ojActionPerformed
 
     private void eat_eggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_eggActionPerformed
         ((Egg) refrigerator.egg).eatEgg();
+        if (Integer.parseInt(quantity[2]) > 0)
+            refrigerator.user.incHunger(5);
         quantityUpdate();
+        jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_eat_eggActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -518,7 +525,10 @@ public class Interface extends javax.swing.JFrame {
 
     private void drink_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_ojActionPerformed
         ((OrangeJuice) refrigerator.oj).drinkOJ();
+        if (Float.parseFloat(quantity[1]) > 0)
+            refrigerator.user.incHunger(3);
         quantityUpdate();
+        jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_drink_ojActionPerformed
 
     private void buy_eggsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_eggsActionPerformed
@@ -529,11 +539,15 @@ public class Interface extends javax.swing.JFrame {
     private void buy_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_milkActionPerformed
         ((Milk) refrigerator.milk).buyMilk();
         quantityUpdate();
+        
     }//GEN-LAST:event_buy_milkActionPerformed
 
     private void drink_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_milkActionPerformed
         ((Milk) refrigerator.milk).drinkMilk();
+        if (Float.parseFloat(quantity[3]) > 0)
+            refrigerator.user.incHunger(3);
         quantityUpdate();
+        jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_drink_milkActionPerformed
 
     private void jProgressBar1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar1StateChanged
