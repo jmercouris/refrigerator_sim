@@ -9,8 +9,9 @@ package com.iit.refrigeratorsimulator;
  * @author jmercouris, hkim
  */
 public class User {
+
     private String name = "Test user";
-    private float money = 2500;
+    private double money = 300;
     private int hunger = 80;
     private int thirst = 0;
     private Refrigerator refrigerator;
@@ -47,7 +48,7 @@ public class User {
     ////////////////////////////////////////////////////////////////////////////
     // Spend Money
     ////////////////////////////////////////////////////////////////////////////
-    private boolean spendMoney(float inputCost){
+    public boolean spendMoney(double inputCost){
         if (inputCost > money)
         {
             return false;
@@ -59,17 +60,11 @@ public class User {
         }
     }
     
-    public float getMoney(){
+    public double getMoney(){
         return money;
     }
+    
     public String getName(){
         return name;
-    }
-    
-    public void setName(String name){
-        if (name.equals("")){
-            this.name = "SPOOKY MYSTERY USER";}
-        else{
-            this.name = name;}
     }
 }

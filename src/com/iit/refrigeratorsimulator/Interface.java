@@ -14,8 +14,6 @@ public class Interface extends javax.swing.JFrame {
     String [] quantity = refrigerator.getQuantity();
     
     
-    
-    
     public void quantityUpdate(){
         quantity = refrigerator.getQuantity();
         this.apple_quantity.setText(quantity[0]);
@@ -26,12 +24,11 @@ public class Interface extends javax.swing.JFrame {
     }
     
     
-    public static void main(String name) {
+    public static void main(String args[]) {
         // Create Interface
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-             //   new NameEntry().setVisible(true);
-                //new Interface().setVisible(true);
+                new Interface().setVisible(true);
             }
         });
     }
@@ -53,10 +50,8 @@ public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     // UI Logic
     ////////////////////////////////////////////////////////////////////////////
-    public Interface(String name) {
+    public Interface() {
         initComponents();
-        setUserName(name);
-        updateScore();
     }
     
     @SuppressWarnings("unchecked")
@@ -108,8 +103,8 @@ public class Interface extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -347,7 +342,7 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel8.setText("Hunger");
 
-        jLabel9.setText("2045.00$");
+        jLabel9.setText("$300.0");
 
         jProgressBar1.setValue(80);
         jProgressBar1.setStringPainted(true);
@@ -436,21 +431,21 @@ public class Interface extends javax.swing.JFrame {
 
         jMenu5.setText("High Scores");
 
-        jMenuItem2.setText("View High Scores");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+        jMenu6.setText("View High Scores");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
             }
         });
-        jMenu5.add(jMenuItem2);
+        jMenu5.add(jMenu6);
 
-        jMenuItem3.setText("Submit Score");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+        jMenu7.setText("Submit Score");
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
             }
         });
-        jMenu5.add(jMenuItem3);
+        jMenu5.add(jMenu7);
 
         jMenuBar1.add(jMenu5);
 
@@ -515,7 +510,10 @@ public class Interface extends javax.swing.JFrame {
     private void buy_applesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_applesActionPerformed
         ((Apple) refrigerator.apple).buyApple();
         quantityUpdate();
-        updateScore();
+        if (!user.spendMoney(1.0)){
+            this.message_1.setText("Not enough money!");
+        }
+        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_applesActionPerformed
 
     private void eat_appleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_appleActionPerformed
@@ -529,19 +527,25 @@ public class Interface extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         refrigerator.decTime();
         this.time_value.setText("Day "+Integer.toString(refrigerator.time));
+        this.message_1.setText("");
         statusBarPerformed();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void buy_waterfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_waterfilterActionPerformed
         refrigerator.buyWaterFilter();
-        updateScore();
+        if (!user.spendMoney(12.0)){
+            this.message_1.setText("Not enough money!");
+        }
+        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_waterfilterActionPerformed
 
     private void buy_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_ojActionPerformed
         ((OrangeJuice) refrigerator.oj).buyOJ();
         quantityUpdate();
-        updateScore();
-
+        if (!user.spendMoney(3.0)){
+            this.message_1.setText("Not enough money!");
+        }
+        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_ojActionPerformed
 
     private void eat_eggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_eggActionPerformed
@@ -567,14 +571,19 @@ public class Interface extends javax.swing.JFrame {
     private void buy_eggsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_eggsActionPerformed
         ((Egg) refrigerator.egg).buyEgg();
         quantityUpdate();
-        updateScore();
+        if (!user.spendMoney(2.5)){
+            this.message_1.setText("Not enough money!");
+        }
+        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_eggsActionPerformed
 
     private void buy_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_milkActionPerformed
         ((Milk) refrigerator.milk).buyMilk();
         quantityUpdate();
-        updateScore();
-        
+        if (!user.spendMoney(3.5)){
+            this.message_1.setText("Not enough money!");
+        }
+        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_milkActionPerformed
 
     private void drink_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_milkActionPerformed
@@ -589,31 +598,23 @@ public class Interface extends javax.swing.JFrame {
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_jProgressBar1StateChanged
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-                   try {
-                       new HighScoreInterface().setVisible(true);   //Pulls and renders highscore table
-                   } catch (SQLException ex) {
-                       Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
-                   } catch (ClassNotFoundException ex) {
-                       Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            new HighScoreInterface().setVisible(true);   //Pulls and renders highscore table
+        } catch (SQLException ex) {
+            Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu6MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
         String username = user.getName();
         int score = (int) user.getMoney();
         new SubmitScore(username,score).setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenu7MouseClicked
 
-    private void updateScore(){    
-                jLabel9.setText("" + user.getMoney());
-    }
-    
-    private void setUserName(String name){
-        user.setName(name);
-        jLabel6.setText(user.getName() + "'s Stats");
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apple_quantity;
     private javax.swing.JButton buy_apples;
@@ -645,10 +646,10 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
