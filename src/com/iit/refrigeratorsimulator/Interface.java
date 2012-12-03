@@ -611,7 +611,7 @@ public class Interface extends javax.swing.JFrame {
     
     private void setUserName(String name){
         user.setName(name);
-        jLabel6.setText(name + "'s Stats");
+        jLabel6.setText(user.getName() + "'s Stats");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
