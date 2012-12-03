@@ -23,15 +23,7 @@ public class Interface extends javax.swing.JFrame {
         
     }
     
-    
-    public static void main(String args[]) {
-        // Create Interface
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interface().setVisible(true);
-            }
-        });
-    }
+   
  
     public void statusBarPerformed(){
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -50,8 +42,10 @@ public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     // UI Logic
     ////////////////////////////////////////////////////////////////////////////
-    public Interface() {
+    public Interface(String username) {
         initComponents();
+        setUserName(username);
+        updateScore();
     }
     
     @SuppressWarnings("unchecked")
@@ -614,7 +608,14 @@ public class Interface extends javax.swing.JFrame {
         int score = (int) user.getMoney();
         new SubmitScore(username,score).setVisible(true);
     }//GEN-LAST:event_jMenu7MouseClicked
-
+        private void updateScore(){    
+                jLabel9.setText("" + user.getMoney());
+    }
+    
+    private void setUserName(String name){
+        user.setName(name);
+        jLabel6.setText(user.getName() + "'s Stats");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apple_quantity;
     private javax.swing.JButton buy_apples;

@@ -67,4 +67,12 @@ public class User {
     public String getName(){
         return name;
     }
+    
+    public void setName(String name){
+        if (name.equals("")){
+            this.name = "SPOOKY MYSTERY USER";}
+        else{
+            this.name = name;}
+    }    
+    
 }
