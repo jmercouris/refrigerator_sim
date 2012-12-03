@@ -26,11 +26,12 @@ public class Interface extends javax.swing.JFrame {
     }
     
     
-    public static void main(String args[]) {
+    public static void main(String name) {
         // Create Interface
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interface().setVisible(true);
+             //   new NameEntry().setVisible(true);
+                //new Interface().setVisible(true);
             }
         });
     }
@@ -52,8 +53,9 @@ public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     // UI Logic
     ////////////////////////////////////////////////////////////////////////////
-    public Interface() {
+    public Interface(String name) {
         initComponents();
+        setUserName(name);
         updateScore();
     }
     
@@ -513,6 +515,7 @@ public class Interface extends javax.swing.JFrame {
     private void buy_applesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_applesActionPerformed
         ((Apple) refrigerator.apple).buyApple();
         quantityUpdate();
+        updateScore();
     }//GEN-LAST:event_buy_applesActionPerformed
 
     private void eat_appleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_appleActionPerformed
@@ -531,11 +534,13 @@ public class Interface extends javax.swing.JFrame {
 
     private void buy_waterfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_waterfilterActionPerformed
         refrigerator.buyWaterFilter();
+        updateScore();
     }//GEN-LAST:event_buy_waterfilterActionPerformed
 
     private void buy_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_ojActionPerformed
         ((OrangeJuice) refrigerator.oj).buyOJ();
         quantityUpdate();
+        updateScore();
 
     }//GEN-LAST:event_buy_ojActionPerformed
 
@@ -562,11 +567,13 @@ public class Interface extends javax.swing.JFrame {
     private void buy_eggsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_eggsActionPerformed
         ((Egg) refrigerator.egg).buyEgg();
         quantityUpdate();
+        updateScore();
     }//GEN-LAST:event_buy_eggsActionPerformed
 
     private void buy_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_milkActionPerformed
         ((Milk) refrigerator.milk).buyMilk();
         quantityUpdate();
+        updateScore();
         
     }//GEN-LAST:event_buy_milkActionPerformed
 
@@ -598,9 +605,13 @@ public class Interface extends javax.swing.JFrame {
         new SubmitScore(username,score).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void updateScore(){
-                
+    private void updateScore(){    
                 jLabel9.setText("" + user.getMoney());
+    }
+    
+    private void setUserName(String name){
+        user.setName(name);
+        jLabel6.setText(name + "'s Stats");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
