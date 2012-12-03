@@ -93,28 +93,32 @@ public class HighScoreInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void getScores() throws SQLException, ClassNotFoundException{
-Class.forName("com.mysql.jdbc.Driver");
-String url ="jdbc:mysql://datafridge.ccgxxpmdysxb.us-east-1.rds.amazonaws.com:3306/highscore";
-   
- Connection con =
- DriverManager.getConnection(
- url,"mbadescu", "123123123");
- 
- 
-  Statement stmt;
+    private void getScores() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url ="jdbc:mysql://datafridge.ccgxxpmdysxb.us-east-1.rds.amazonaws.com:3306/highscore";
+               
+             Connection con =
+             DriverManager.getConnection(
+             url,"mbadescu", "123123123");
+              Statement stmt;
 
-    stmt = con.createStatement();
-    ResultSet rs = stmt.executeQuery("Select * from scores ORDER BY score DESC;");
-    
-    while (rs.next()){
-    String username = rs.getString("username");
-    int score2 = rs.getInt("score");
-   
-    jTextArea2.append(username + "\n");//print usernames
-    jTextArea3.append(Integer.toString(score2) + "\n"); //print score
-    }
-    con.close();
+                stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("Select * from scores ORDER BY score DESC;");
+                
+                while (rs.next()){
+                String username = rs.getString("username");
+                int score2 = rs.getInt("score");
+               
+                jTextArea2.append(username + "\n");//print usernames
+                jTextArea3.append(Integer.toString(score2) + "\n"); //print score
+                }
+                con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
  }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

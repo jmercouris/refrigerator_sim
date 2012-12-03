@@ -95,7 +95,7 @@ public class SubmitScore extends javax.swing.JFrame {
     
     public static void submit(String username, int score){
         
-        try {
+ try {
  Statement stmt;
  
   Class.forName("com.mysql.jdbc.Driver");
