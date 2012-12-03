@@ -9,7 +9,7 @@ package com.iit.refrigeratorsimulator;
  * @author jmercouris, hkim
  */
 public class User {
-
+    private String name = "Test user";
     private float money = 2500;
     private int hunger = 80;
     private int thirst = 0;
@@ -57,5 +57,12 @@ public class User {
             money-=inputCost;
             return true;
         }
+    }
+    
+    public float getMoney(){
+        return money;
+    }
+    public String getName(){
+        return name;
     }
 }

@@ -1,10 +1,14 @@
 package com.iit.refrigeratorsimulator;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     // Main Method
     ////////////////////////////////////////////////////////////////////////////
-    
+    User user = new User();
     Refrigerator refrigerator = new Refrigerator();
     Store store = new Store();
     String [] quantity = refrigerator.getQuantity();
@@ -50,6 +54,7 @@ public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     public Interface() {
         initComponents();
+        updateScore();
     }
     
     @SuppressWarnings("unchecked")
@@ -100,6 +105,9 @@ public class Interface extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -424,6 +432,26 @@ public class Interface extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu5.setText("High Scores");
+
+        jMenuItem2.setText("View High Scores");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem2);
+
+        jMenuItem3.setText("Submit Score");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu5);
+
         setJMenuBar(jMenuBar1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -554,6 +582,27 @@ public class Interface extends javax.swing.JFrame {
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_jProgressBar1StateChanged
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+                   try {
+                       new HighScoreInterface().setVisible(true);   //Pulls and renders highscore table
+                   } catch (SQLException ex) {
+                       Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
+                   } catch (ClassNotFoundException ex) {
+                       Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        String username = user.getName();
+        int score = (int) user.getMoney();
+        new SubmitScore(username,score).setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void updateScore(){
+                
+                jLabel9.setText("" + user.getMoney());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apple_quantity;
     private javax.swing.JButton buy_apples;
@@ -584,8 +633,11 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
