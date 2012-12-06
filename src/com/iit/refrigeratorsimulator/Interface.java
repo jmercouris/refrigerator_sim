@@ -242,15 +242,15 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setText("3.00$");
+        jLabel12.setText("1.00$");
 
-        jLabel13.setText("2.00$");
+        jLabel13.setText("2.50$");
 
-        jLabel14.setText("5.00$");
+        jLabel14.setText("3.00$");
 
-        jLabel15.setText("3.00$");
+        jLabel15.setText("2.50$");
 
-        jLabel16.setText("20.00$");
+        jLabel16.setText("2.00$");
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -349,7 +349,7 @@ public class Interface extends javax.swing.JFrame {
             .add(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
                         .add(0, 0, Short.MAX_VALUE)
                         .add(jButton3)))
@@ -733,6 +733,19 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void incrementTime() {
+        if (refrigerator.checkWaterFilter()) 
+        {
+            if (refrigerator.waterFilter.getExpDate() == 0) 
+            {
+                consoleOutput("\nYour water filter has expired!");
+                user.punishHunger();
+            } else 
+            {
+                consoleOutput("Your water filter expires in " + Integer.toString(refrigerator.waterFilter.getExpDate()) + " Days");
+            }
+        }
+
+
         refrigerator.decTime();
         this.time_value.setText("Day " + Integer.toString(refrigerator.time));
         this.message_1.setText("");

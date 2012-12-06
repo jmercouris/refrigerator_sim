@@ -20,7 +20,7 @@ public class Refrigerator {
     Food egg = new Egg();
     Food milk = new Milk();
     
-    WaterFilter waterFilter;
+    WaterFilter waterFilter = new WaterFilter();
     
     
     public String [] getQuantity(){
@@ -34,9 +34,13 @@ public class Refrigerator {
         return display;
     }
     
-    public void decTime(){
+    public void decTime()
+    {
+        if (time > 0)
+        {
         time -= 1;
         user.decrementHunger();
+        }
     }
     
     
@@ -74,8 +78,7 @@ public class Refrigerator {
     ////////////////////////////////////////////////////////////////////////////
     public void installWaterFilter(WaterFilter inputWaterFilter)
     {
-        waterFilter = inputWaterFilter;
-        System.out.println("Water Filter Installed");
+        waterFilter.setNewFilter();
     }
     
     ////////////////////////////////////////////////////////////////////////////
@@ -83,7 +86,6 @@ public class Refrigerator {
     ////////////////////////////////////////////////////////////////////////////
     public boolean checkWaterFilter()
     {
-        System.out.println("Checking Water Filter");
         return waterFilter.getExpirationStatus();
     }
 }

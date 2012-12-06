@@ -20,6 +20,10 @@ public class User {
         
     }
     
+    public void punishHunger (){
+        hunger -=1;
+    }
+    
     public int getHunger(){
         return hunger;
     }

@@ -4,14 +4,15 @@ public class WaterFilter {
     // Expiration Date Calculcated based on creation time Plus Thirty Days
     private double expirationDate;
     // Expiration Life is set to Thirty Days in seconds
-    private static double expirationLife = 7889230;
+    private static int expirationLife = 30;
+    private static int quantity = 1;
     
     ////////////////////////////////////////////////////////////////////////////
     // Create New Water Filter
     ////////////////////////////////////////////////////////////////////////////
     WaterFilter()
     {
-        expirationDate = (System.currentTimeMillis() / 1000) + expirationLife;
+        
     }
     
     ////////////////////////////////////////////////////////////////////////////
@@ -19,13 +20,38 @@ public class WaterFilter {
     ////////////////////////////////////////////////////////////////////////////
     public boolean getExpirationStatus()
     {
-        if (expirationDate >= (System.currentTimeMillis() / 1000))
-        {
+        if (expirationLife < 6)
             return true;
-        }
         else
-        {
             return false;
-        }
     }
+    
+    public int getExpDate(){
+        return expirationLife;
+    }
+    
+    public int getQuantity(){
+        if (quantity == 0)
+            return quantity;
+        else
+            return quantity-1;
+    }
+    
+    public void setNewFilter(){
+        expirationLife = 30;
+    }
+    
+    public void decExpDate(){
+        if (expirationLife > 0)
+            expirationLife -= 1;
+    }
+    
+    public void incQuantity(){
+        quantity += 1;
+    }
+    
+    public void decQuantity(){
+        quantity -= 1;
+    }
+    
 }
