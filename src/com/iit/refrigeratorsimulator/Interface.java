@@ -81,6 +81,7 @@ public class Interface extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -334,9 +335,17 @@ public class Interface extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
+
+        jButton3.setText("Clear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -346,12 +355,18 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jScrollPane2)
                 .addContainerGap())
+            .add(jPanel4Layout.createSequentialGroup()
+                .add(134, 134, 134)
+                .add(jButton3)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 259, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jButton3)
                 .addContainerGap())
         );
 
@@ -543,11 +558,14 @@ public class Interface extends javax.swing.JFrame {
     // Buy Apples
     ////////////////////////////////////////////////////////////////////////////
     private void buy_applesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_applesActionPerformed
-        jTextArea1.setText("You bought an apple.");
-        ((Apple) refrigerator.apple).buy();
-        quantityUpdate();
+
+
         if (!user.spendMoney(1.0)) {
             this.message_1.setText("Not enough money!");
+        }else{
+        jTextArea1.append("You bought apples.\n");
+        ((Apple) refrigerator.apple).buy();
+        quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_applesActionPerformed
@@ -559,6 +577,8 @@ public class Interface extends javax.swing.JFrame {
         ((Apple) refrigerator.apple).eat();
         if (Integer.parseInt(quantity[0]) > 0) {
             refrigerator.user.incrementHunger(5);
+            jTextArea1.append("You ate an apple.\n");
+
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -575,9 +595,14 @@ public class Interface extends javax.swing.JFrame {
     // Buy Water Filter
     ////////////////////////////////////////////////////////////////////////////
     private void buy_waterfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_waterfilterActionPerformed
-        refrigerator.buyWaterFilter();
+
         if (!user.spendMoney(12.0)) {
             this.message_1.setText("Not enough money!");
+        }
+        else{
+        jTextArea1.append("You bought a water filter.\n");
+        refrigerator.buyWaterFilter();        
+        quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_waterfilterActionPerformed
@@ -586,10 +611,15 @@ public class Interface extends javax.swing.JFrame {
     // Buy Orange Juice
     ////////////////////////////////////////////////////////////////////////////
     private void buy_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_ojActionPerformed
-        ((OrangeJuice) refrigerator.oj).buy();
+
         quantityUpdate();
         if (!user.spendMoney(3.0)) {
             this.message_1.setText("Not enough money!");
+        }
+        else{
+        jTextArea1.append("You bought orange juice.\n");
+        ((OrangeJuice) refrigerator.oj).buy();       
+        quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_ojActionPerformed
@@ -600,6 +630,7 @@ public class Interface extends javax.swing.JFrame {
     private void eat_eggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_eggActionPerformed
         ((Egg) refrigerator.egg).eat();
         if (Integer.parseInt(quantity[2]) > 0) {
+            jTextArea1.append("You ate eggs.\n");
             refrigerator.user.incrementHunger(5);
         }
         quantityUpdate();
@@ -620,6 +651,7 @@ public class Interface extends javax.swing.JFrame {
         ((OrangeJuice) refrigerator.oj).eat();
         if (Float.parseFloat(quantity[1]) > 0) {
             refrigerator.user.incrementHunger(3);
+            jTextArea1.append("You drank orange juice.\n");
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -629,10 +661,14 @@ public class Interface extends javax.swing.JFrame {
     // Buy Eggs
     ////////////////////////////////////////////////////////////////////////////
     private void buy_eggsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_eggsActionPerformed
-        ((Egg) refrigerator.egg).buy();
-        quantityUpdate();
+
         if (!user.spendMoney(2.5)) {
             this.message_1.setText("Not enough money!");
+        }
+        else{
+        jTextArea1.append("You bought eggs.\n");
+        ((Egg) refrigerator.egg).buy();
+        quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_eggsActionPerformed
@@ -642,9 +678,13 @@ public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     private void buy_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_milkActionPerformed
         ((Milk) refrigerator.milk).buy();
-        quantityUpdate();
         if (!user.spendMoney(3.5)) {
             this.message_1.setText("Not enough money!");
+        }
+        else{
+        jTextArea1.append("You bought milk.\n");
+        ((Egg) refrigerator.egg).buy();
+        quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_milkActionPerformed
@@ -656,6 +696,7 @@ public class Interface extends javax.swing.JFrame {
         ((Milk) refrigerator.milk).eat();
         if (Float.parseFloat(quantity[3]) > 0) {
             refrigerator.user.incrementHunger(3);
+            jTextArea1.append("You drank milk.\n");
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -701,10 +742,15 @@ public class Interface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTextArea1.setText("History cleared!\n");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public void incrementTime() {
         refrigerator.decTime();
         this.time_value.setText("Day " + Integer.toString(refrigerator.time));
         this.message_1.setText("");
+        jTextArea1.append("One day has passed...\n");
         statusBarPerformed();
     }
 
@@ -736,6 +782,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel egg_quantity;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
