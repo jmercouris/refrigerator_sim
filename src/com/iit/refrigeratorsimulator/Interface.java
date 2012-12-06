@@ -93,9 +93,6 @@ public class Interface extends javax.swing.JFrame {
         jProgressBar2 = new javax.swing.JProgressBar();
         jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -452,15 +449,6 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Refrigerator");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Store");
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Time");
-        jMenuBar1.add(jMenu4);
-
         jMenu3.setText("Help");
 
         jMenuItem1.setText("About");
@@ -797,10 +785,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
