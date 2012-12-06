@@ -15,9 +15,6 @@ public class AutoTime implements Runnable {
     JProgressBar referenceBar;
     boolean run = false;
     Interface referenceInterface;
-    
-
-
 
     public AutoTime(JProgressBar progressBarReferenceInput, Interface interfaceInput) {
         super();
