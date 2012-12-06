@@ -19,14 +19,12 @@ public class Milk extends Food {
         super.setQuantity(0);
     }
     
-    public void buyMilk(){
-        float curr = super.getQuantity();
-        super.setQuantity(curr + ADD_AMOUNT);
+    
+    public boolean eat(){
+        return super.eat(DEC_AMOUNT);
     }
     
-    public void drinkMilk(){
-        float curr = super.getQuantity();
-        if (curr != 0)
-           super.setQuantity(curr - DEC_AMOUNT);
+    public void buy(){
+        super.buy(ADD_AMOUNT);
     }
 }

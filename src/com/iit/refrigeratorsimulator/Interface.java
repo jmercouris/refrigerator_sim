@@ -1,5 +1,6 @@
 package com.iit.refrigeratorsimulator;
 
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,37 +9,26 @@ public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     // Main Method
     ////////////////////////////////////////////////////////////////////////////
+
     User user = new User();
     Refrigerator refrigerator = new Refrigerator();
     Store store = new Store();
-    String [] quantity = refrigerator.getQuantity();
-    
-    
-    public void quantityUpdate(){
+    String[] quantity = refrigerator.getQuantity();
+    Thread thread;
+    AutoTime autoTime;
+
+    public void quantityUpdate() {
         quantity = refrigerator.getQuantity();
         this.apple_quantity.setText(quantity[0]);
         this.oj_quantity.setText(quantity[1]);
         this.egg_quantity.setText(quantity[2]);
         this.milk_quantity.setText(quantity[3]);
-        
     }
-    
-   
- 
-    public void statusBarPerformed(){
+
+    public void statusBarPerformed() {
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     ////////////////////////////////////////////////////////////////////////////
     // UI Logic
     ////////////////////////////////////////////////////////////////////////////
@@ -47,7 +37,7 @@ public class Interface extends javax.swing.JFrame {
         setUserName(username);
         updateScore();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -58,18 +48,18 @@ public class Interface extends javax.swing.JFrame {
         drink_oj = new javax.swing.JButton();
         drink_milk = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        buy_apples = new javax.swing.JButton();
-        buy_eggs = new javax.swing.JButton();
-        buy_oj = new javax.swing.JButton();
-        buy_milk = new javax.swing.JButton();
-        buy_waterfilter = new javax.swing.JButton();
         apple_quantity = new javax.swing.JLabel();
         egg_quantity = new javax.swing.JLabel();
         oj_quantity = new javax.swing.JLabel();
         oj_unit = new javax.swing.JLabel();
         milk_quantity = new javax.swing.JLabel();
         milk_unit = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        buy_apples = new javax.swing.JButton();
+        buy_eggs = new javax.swing.JButton();
+        buy_oj = new javax.swing.JButton();
+        buy_milk = new javax.swing.JButton();
+        buy_waterfilter = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -90,6 +80,8 @@ public class Interface extends javax.swing.JFrame {
         time_value = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -118,7 +110,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        drink_oj.setText("Drink Orang Juice");
+        drink_oj.setText("Drink Orange Juice");
         drink_oj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drink_ojActionPerformed(evt);
@@ -139,6 +131,18 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        apple_quantity.setText("0");
+
+        egg_quantity.setText("0");
+
+        oj_quantity.setText("0.0");
+
+        oj_unit.setText("L");
+
+        milk_quantity.setText("0.0");
+
+        milk_unit.setText("L");
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -151,22 +155,46 @@ public class Interface extends javax.swing.JFrame {
                     .add(drink_oj, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(eat_egg, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(eat_apple, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .add(183, 183, 183)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(apple_quantity, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(egg_quantity, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jPanel1Layout.createSequentialGroup()
+                                .add(oj_quantity, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 27, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(milk_unit)
+                                    .add(oj_unit))))
+                        .add(0, 9, Short.MAX_VALUE))
+                    .add(milk_quantity, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(eat_apple)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(eat_apple)
+                    .add(apple_quantity))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(eat_egg)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(eat_egg)
+                    .add(egg_quantity))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(drink_oj)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(drink_oj)
+                    .add(oj_quantity)
+                    .add(oj_unit))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(drink_milk)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(drink_milk)
+                    .add(milk_quantity)
+                    .add(milk_unit))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton1)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -206,18 +234,6 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        apple_quantity.setText("0");
-
-        egg_quantity.setText("0");
-
-        oj_quantity.setText("0.0");
-
-        oj_unit.setText("L");
-
-        milk_quantity.setText("0.0");
-
-        milk_unit.setText("L");
-
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -230,42 +246,19 @@ public class Interface extends javax.swing.JFrame {
                     .add(buy_eggs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(buy_apples, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(buy_oj, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 88, Short.MAX_VALUE)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(egg_quantity, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                        .add(apple_quantity, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(jPanel2Layout.createSequentialGroup()
-                        .add(oj_quantity, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 27, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(oj_unit))
-                    .add(jPanel2Layout.createSequentialGroup()
-                        .add(milk_quantity, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(milk_unit)))
-                .addContainerGap())
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(buy_apples)
-                    .add(apple_quantity))
+                .add(buy_apples)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(buy_eggs)
-                    .add(egg_quantity))
+                .add(buy_eggs)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(buy_oj)
-                    .add(oj_quantity)
-                    .add(oj_unit))
+                .add(buy_oj)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(buy_milk)
-                    .add(milk_quantity)
-                    .add(milk_unit))
+                .add(buy_milk)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(buy_waterfilter)
                 .addContainerGap(359, Short.MAX_VALUE))
@@ -286,7 +279,7 @@ public class Interface extends javax.swing.JFrame {
             .add(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(message_1)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -334,7 +327,7 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel7.setText("Money:");
 
-        jLabel8.setText("Hunger");
+        jLabel8.setText("Satiation:");
 
         jLabel9.setText("$300.0");
 
@@ -359,6 +352,13 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel11.setText("Turn:");
 
+        jButton2.setText("Auto");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -367,6 +367,10 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jLabel6)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jButton2)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jProgressBar2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel11)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton6)
@@ -386,9 +390,10 @@ public class Interface extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel5Layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jProgressBar2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jLabel6)
                         .add(jLabel7)
@@ -396,9 +401,10 @@ public class Interface extends javax.swing.JFrame {
                         .add(jLabel9)
                         .add(jLabel10)
                         .add(time_value)
-                        .add(jButton6)
-                        .add(jLabel11))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jProgressBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(jButton6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jLabel11)
+                        .add(jButton2))
+                    .add(jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -452,25 +458,23 @@ public class Interface extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jLabel1)
+                    .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel2))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jLabel1))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jLabel2))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jPanel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jLabel4)
-                                    .add(jLabel3))
-                                .add(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                            .add(jLabel4)
+                            .add(jLabel3))
+                        .add(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -497,103 +501,145 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Print About Menu
+    ////////////////////////////////////////////////////////////////////////////
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         System.out.println("About");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Buy Apples
+    ////////////////////////////////////////////////////////////////////////////
     private void buy_applesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_applesActionPerformed
-        ((Apple) refrigerator.apple).buyApple();
+        ((Apple) refrigerator.apple).buy();
         quantityUpdate();
-        if (!user.spendMoney(1.0)){
+        if (!user.spendMoney(1.0)) {
             this.message_1.setText("Not enough money!");
         }
-        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
+        this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_applesActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Eat Apples
+    ////////////////////////////////////////////////////////////////////////////
     private void eat_appleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_appleActionPerformed
-        ((Apple) refrigerator.apple).eatApple();
-        if (Integer.parseInt(quantity[0]) > 0)
+        ((Apple) refrigerator.apple).eat();
+        if (Integer.parseInt(quantity[0]) > 0) {
             refrigerator.user.incHunger(5);
+        }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_eat_appleActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Advance Time
+    ////////////////////////////////////////////////////////////////////////////
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        refrigerator.decTime();
-        this.time_value.setText("Day "+Integer.toString(refrigerator.time));
-        this.message_1.setText("");
-        statusBarPerformed();
+        incrementTime();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Buy Water Filter
+    ////////////////////////////////////////////////////////////////////////////
     private void buy_waterfilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_waterfilterActionPerformed
         refrigerator.buyWaterFilter();
-        if (!user.spendMoney(12.0)){
+        if (!user.spendMoney(12.0)) {
             this.message_1.setText("Not enough money!");
         }
-        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
+        this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_waterfilterActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Buy Orange Juice
+    ////////////////////////////////////////////////////////////////////////////
     private void buy_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_ojActionPerformed
-        ((OrangeJuice) refrigerator.oj).buyOJ();
+        ((OrangeJuice) refrigerator.oj).buy();
         quantityUpdate();
-        if (!user.spendMoney(3.0)){
+        if (!user.spendMoney(3.0)) {
             this.message_1.setText("Not enough money!");
         }
-        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
+        this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_ojActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Eat Eggs
+    ////////////////////////////////////////////////////////////////////////////
     private void eat_eggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_eggActionPerformed
-        ((Egg) refrigerator.egg).eatEgg();
-        if (Integer.parseInt(quantity[2]) > 0)
+        ((Egg) refrigerator.egg).eat();
+        if (Integer.parseInt(quantity[2]) > 0) {
             refrigerator.user.incHunger(5);
+        }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_eat_eggActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // 
+    ////////////////////////////////////////////////////////////////////////////
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Drink Orange Juice
+    ////////////////////////////////////////////////////////////////////////////
     private void drink_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_ojActionPerformed
-        ((OrangeJuice) refrigerator.oj).drinkOJ();
-        if (Float.parseFloat(quantity[1]) > 0)
+        ((OrangeJuice) refrigerator.oj).eat();
+        if (Float.parseFloat(quantity[1]) > 0) {
             refrigerator.user.incHunger(3);
+        }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_drink_ojActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Buy Eggs
+    ////////////////////////////////////////////////////////////////////////////
     private void buy_eggsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_eggsActionPerformed
-        ((Egg) refrigerator.egg).buyEgg();
+        ((Egg) refrigerator.egg).buy();
         quantityUpdate();
-        if (!user.spendMoney(2.5)){
+        if (!user.spendMoney(2.5)) {
             this.message_1.setText("Not enough money!");
         }
-        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
+        this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_eggsActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Buy Milk
+    ////////////////////////////////////////////////////////////////////////////
     private void buy_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buy_milkActionPerformed
-        ((Milk) refrigerator.milk).buyMilk();
+        ((Milk) refrigerator.milk).buy();
         quantityUpdate();
-        if (!user.spendMoney(3.5)){
+        if (!user.spendMoney(3.5)) {
             this.message_1.setText("Not enough money!");
         }
-        this.jLabel9.setText("$"+Double.toString(user.getMoney()));
+        this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_milkActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Drink Milk
+    ////////////////////////////////////////////////////////////////////////////
     private void drink_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_milkActionPerformed
-        ((Milk) refrigerator.milk).drinkMilk();
-        if (Float.parseFloat(quantity[3]) > 0)
+        ((Milk) refrigerator.milk).eat();
+        if (Float.parseFloat(quantity[3]) > 0) {
             refrigerator.user.incHunger(3);
+        }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_drink_milkActionPerformed
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Set Hunger
+    ////////////////////////////////////////////////////////////////////////////
     private void jProgressBar1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar1StateChanged
         jProgressBar1.setValue(refrigerator.user.getHunger());
     }//GEN-LAST:event_jProgressBar1StateChanged
 
+    ////////////////////////////////////////////////////////////////////////////
+    // High Score
+    ////////////////////////////////////////////////////////////////////////////
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-
         try {
             new HighScoreInterface().setVisible(true);   //Pulls and renders highscore table
         } catch (SQLException ex) {
@@ -606,13 +652,45 @@ public class Interface extends javax.swing.JFrame {
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
         String username = user.getName();
         int score = (int) user.getMoney();
-        new SubmitScore(username,score).setVisible(true);
+        new SubmitScore(username, score).setVisible(true);
     }//GEN-LAST:event_jMenu7MouseClicked
-        private void updateScore(){    
-                jLabel9.setText("" + user.getMoney());
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Set Automatic
+    ////////////////////////////////////////////////////////////////////////////
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        if (thread == null || !thread.isAlive())
+        {
+        autoTime = new AutoTime(jProgressBar2, this);
+        thread = new Thread(autoTime);
+        thread.start();
+        }
+        else
+        {
+            autoTime.toggleActive();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    public void incrementTime()
+    {
+        refrigerator.decTime();
+        this.time_value.setText("Day " + Integer.toString(refrigerator.time));
+        this.message_1.setText("");
+        statusBarPerformed();
     }
     
-    private void setUserName(String name){
+    ////////////////////////////////////////////////////////////////////////////
+    // Update Score
+    ////////////////////////////////////////////////////////////////////////////
+    private void updateScore() {
+        jLabel9.setText("" + user.getMoney());
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Set User Name on Initialization
+    ////////////////////////////////////////////////////////////////////////////
+    private void setUserName(String name) {
         user.setName(name);
         jLabel6.setText(user.getName() + "'s Stats");
     }
@@ -629,6 +707,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton eat_egg;
     private javax.swing.JLabel egg_quantity;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -657,6 +736,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel message_1;
     private javax.swing.JLabel milk_quantity;
