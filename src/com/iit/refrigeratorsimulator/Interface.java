@@ -4,8 +4,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 public class Interface extends javax.swing.JFrame {
     ////////////////////////////////////////////////////////////////////////////
     // Main Method
@@ -554,6 +552,10 @@ public class Interface extends javax.swing.JFrame {
         System.out.println("About");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void consoleOutput(String inputString) {
+        message_1.setText(inputString);
+        jTextArea1.append(inputString);
+    }
     ////////////////////////////////////////////////////////////////////////////
     // Buy Apples
     ////////////////////////////////////////////////////////////////////////////
@@ -562,10 +564,10 @@ public class Interface extends javax.swing.JFrame {
 
         if (!user.spendMoney(1.0)) {
             this.message_1.setText("Not enough money!");
-        }else{
-        jTextArea1.append("You bought apples.\n");
-        ((Apple) refrigerator.apple).buy();
-        quantityUpdate();
+        } else {
+            consoleOutput("You bought apples.\n");
+            ((Apple) refrigerator.apple).buy();
+            quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_applesActionPerformed
@@ -577,11 +579,11 @@ public class Interface extends javax.swing.JFrame {
         ((Apple) refrigerator.apple).eat();
         if (Integer.parseInt(quantity[0]) > 0) {
             refrigerator.user.incrementHunger(5);
-            jTextArea1.append("You ate an apple.\n");
-
+            consoleOutput("You ate an apple.\n");
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
+
     }//GEN-LAST:event_eat_appleActionPerformed
 
     ////////////////////////////////////////////////////////////////////////////
@@ -598,11 +600,10 @@ public class Interface extends javax.swing.JFrame {
 
         if (!user.spendMoney(12.0)) {
             this.message_1.setText("Not enough money!");
-        }
-        else{
-        jTextArea1.append("You bought a water filter.\n");
-        refrigerator.buyWaterFilter();        
-        quantityUpdate();
+        } else {
+            consoleOutput("You bought a water filter.\n");
+            refrigerator.buyWaterFilter();
+            quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_waterfilterActionPerformed
@@ -615,11 +616,10 @@ public class Interface extends javax.swing.JFrame {
         quantityUpdate();
         if (!user.spendMoney(3.0)) {
             this.message_1.setText("Not enough money!");
-        }
-        else{
-        jTextArea1.append("You bought orange juice.\n");
-        ((OrangeJuice) refrigerator.oj).buy();       
-        quantityUpdate();
+        } else {
+            consoleOutput("You bought orange juice.\n");
+            ((OrangeJuice) refrigerator.oj).buy();
+            quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_ojActionPerformed
@@ -630,7 +630,7 @@ public class Interface extends javax.swing.JFrame {
     private void eat_eggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_eggActionPerformed
         ((Egg) refrigerator.egg).eat();
         if (Integer.parseInt(quantity[2]) > 0) {
-            jTextArea1.append("You ate eggs.\n");
+            consoleOutput("You ate eggs.\n");
             refrigerator.user.incrementHunger(5);
         }
         quantityUpdate();
@@ -651,7 +651,7 @@ public class Interface extends javax.swing.JFrame {
         ((OrangeJuice) refrigerator.oj).eat();
         if (Float.parseFloat(quantity[1]) > 0) {
             refrigerator.user.incrementHunger(3);
-            jTextArea1.append("You drank orange juice.\n");
+            consoleOutput("You drank orange juice.\n");
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -664,11 +664,10 @@ public class Interface extends javax.swing.JFrame {
 
         if (!user.spendMoney(2.5)) {
             this.message_1.setText("Not enough money!");
-        }
-        else{
-        jTextArea1.append("You bought eggs.\n");
-        ((Egg) refrigerator.egg).buy();
-        quantityUpdate();
+        } else {
+            consoleOutput("You bought eggs.\n");
+            ((Egg) refrigerator.egg).buy();
+            quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_eggsActionPerformed
@@ -680,11 +679,10 @@ public class Interface extends javax.swing.JFrame {
         ((Milk) refrigerator.milk).buy();
         if (!user.spendMoney(3.5)) {
             this.message_1.setText("Not enough money!");
-        }
-        else{
-        jTextArea1.append("You bought milk.\n");
-        ((Egg) refrigerator.egg).buy();
-        quantityUpdate();
+        } else {
+            consoleOutput("You bought milk.\n");
+            ((Egg) refrigerator.egg).buy();
+            quantityUpdate();
         }
         this.jLabel9.setText("$" + Double.toString(user.getMoney()));
     }//GEN-LAST:event_buy_milkActionPerformed
@@ -696,7 +694,7 @@ public class Interface extends javax.swing.JFrame {
         ((Milk) refrigerator.milk).eat();
         if (Float.parseFloat(quantity[3]) > 0) {
             refrigerator.user.incrementHunger(3);
-            jTextArea1.append("You drank milk.\n");
+            consoleOutput("You drank milk.\n");
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -732,7 +730,7 @@ public class Interface extends javax.swing.JFrame {
     // Set Automatic
     ////////////////////////////////////////////////////////////////////////////
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- 
+
         if (thread == null || !thread.isAlive()) {
             autoTime = new AutoTime(jProgressBar2, this);
             thread = new Thread(autoTime);
@@ -743,14 +741,14 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTextArea1.setText("History cleared!\n");
+        consoleOutput("History cleared!\n");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void incrementTime() {
         refrigerator.decTime();
         this.time_value.setText("Day " + Integer.toString(refrigerator.time));
         this.message_1.setText("");
-        jTextArea1.append("Day " + Integer.toString(refrigerator.time) + " Passed. Satiation:" + jProgressBar1.getValue()+"\n");
+        consoleOutput("Day " + Integer.toString(refrigerator.time) + " Passed. Satiation:" + jProgressBar1.getValue() + "\n");
         statusBarPerformed();
     }
 
