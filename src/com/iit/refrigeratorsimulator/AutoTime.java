@@ -32,7 +32,6 @@ public class AutoTime implements Runnable {
                 Thread.sleep(100);
                 int currentValue = referenceBar.getValue();
                 currentValue++;
-                System.out.println(currentValue);
                 if (currentValue > 100) {
                     currentValue = 0;
                     referenceInterface.incrementTime();

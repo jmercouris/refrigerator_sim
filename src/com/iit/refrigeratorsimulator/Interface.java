@@ -37,6 +37,13 @@ public class Interface extends javax.swing.JFrame {
         setUserName(username);
         updateScore();
     }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // Set Prices
+    ////////////////////////////////////////////////////////////////////////////
+    public void setPrices(){
+        
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -526,7 +533,7 @@ public class Interface extends javax.swing.JFrame {
     private void eat_appleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_appleActionPerformed
         ((Apple) refrigerator.apple).eat();
         if (Integer.parseInt(quantity[0]) > 0) {
-            refrigerator.user.incHunger(5);
+            refrigerator.user.incrementHunger(5);
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -568,7 +575,7 @@ public class Interface extends javax.swing.JFrame {
     private void eat_eggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eat_eggActionPerformed
         ((Egg) refrigerator.egg).eat();
         if (Integer.parseInt(quantity[2]) > 0) {
-            refrigerator.user.incHunger(5);
+            refrigerator.user.incrementHunger(5);
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -587,7 +594,7 @@ public class Interface extends javax.swing.JFrame {
     private void drink_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_ojActionPerformed
         ((OrangeJuice) refrigerator.oj).eat();
         if (Float.parseFloat(quantity[1]) > 0) {
-            refrigerator.user.incHunger(3);
+            refrigerator.user.incrementHunger(3);
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());
@@ -623,7 +630,7 @@ public class Interface extends javax.swing.JFrame {
     private void drink_milkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_milkActionPerformed
         ((Milk) refrigerator.milk).eat();
         if (Float.parseFloat(quantity[3]) > 0) {
-            refrigerator.user.incHunger(3);
+            refrigerator.user.incrementHunger(3);
         }
         quantityUpdate();
         jProgressBar1.setValue(refrigerator.user.getHunger());

@@ -24,14 +24,21 @@ public class User {
         return hunger;
     }
     
-    public void incHunger(int calorie)
+    public void incrementHunger(int calorie)
     {
         hunger += calorie;
     }
     
-    public void decHunger()
+    public void decrementHunger()
     {
-        hunger -= 20;
+        if (hunger > 5)
+        {
+        hunger = (int)(hunger * .8);
+        }
+        else if (hunger > 0)
+        {
+            hunger--;
+        }
         
     }
 

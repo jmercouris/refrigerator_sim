@@ -36,7 +36,7 @@ public class Refrigerator {
     
     public void decTime(){
         time -= 1;
-        user.decHunger();
+        user.decrementHunger();
     }
     
     
