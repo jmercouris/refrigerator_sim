@@ -26,6 +26,9 @@ public class Interface extends javax.swing.JFrame {
 
     public void statusBarPerformed() {
         jProgressBar1.setValue(refrigerator.user.getHunger());
+        if(refrigerator.user.getHunger() == 0){
+            killGame();
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -626,13 +629,6 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_eat_eggActionPerformed
 
     ////////////////////////////////////////////////////////////////////////////
-    // 
-    ////////////////////////////////////////////////////////////////////////////
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    ////////////////////////////////////////////////////////////////////////////
     // Drink Orange Juice
     ////////////////////////////////////////////////////////////////////////////
     private void drink_ojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drink_ojActionPerformed
@@ -710,7 +706,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
         String username = user.getName();
-        int score = (int) user.getMoney();
+        int score = refrigerator.startingtime - refrigerator.time;
         new SubmitScore(username, score).setVisible(true);
     }//GEN-LAST:event_jMenu7MouseClicked
 
@@ -730,9 +726,15 @@ public class Interface extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         consoleOutput("History cleared!\n");
+        jTextArea1.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void incrementTime() {
+        
         if (refrigerator.checkWaterFilter()) 
         {
             if (refrigerator.waterFilter.getExpDate() == 0) 
@@ -747,6 +749,9 @@ public class Interface extends javax.swing.JFrame {
 
 
         refrigerator.decTime();
+        if(refrigerator.time < 1){
+            killGame();//Game over
+        }
         this.time_value.setText("Day " + Integer.toString(refrigerator.time));
         this.message_1.setText("");
         consoleOutput("Day " + Integer.toString(refrigerator.time) + " Passed. Satiation:" + jProgressBar1.getValue() + "\n");
@@ -766,6 +771,16 @@ public class Interface extends javax.swing.JFrame {
     private void setUserName(String name) {
         user.setName(name);
         jLabel6.setText(user.getName() + "'s Stats");
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // Game over
+    ////////////////////////////////////////////////////////////////////////////
+    private void killGame(){
+        String username = user.getName();
+        int score = refrigerator.startingtime - refrigerator.time;
+        new SubmitScore(username, score).setVisible(true); // pop up score submission prompt
+        this.dispose();//Close main window
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apple_quantity;

@@ -10,7 +10,8 @@ package com.iit.refrigeratorsimulator;
  */
 public class Refrigerator {
     private final int NUM_FOOD = 4;
-    public int time = 90;
+    public final int startingtime = 90;
+    public int time = startingtime;
     float [] quantStat = new float [6];
     
     User user = new User();

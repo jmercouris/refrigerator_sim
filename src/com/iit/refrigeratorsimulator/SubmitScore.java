@@ -19,10 +19,12 @@ public class SubmitScore extends javax.swing.JFrame {
      */
     public SubmitScore(String username, int score) {
         initComponents();
-        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE); //prevents entire program from closing if this window closes
-        this.username = username;
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); //prevents entire program from closing if this window closes
+        
+        this.username = username; //sets up public variables
         this.score = score;
-        jLabel1.setText("Congratulations " + username + "\n your score is " + score);
+        
+        jLabel1.setText("Congratulations " + username + " you have survived " + score + " days.");
         
     }
 
@@ -37,6 +39,7 @@ public class SubmitScore extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +52,13 @@ public class SubmitScore extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
+        jButton2.setText("Quit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,21 +66,25 @@ public class SubmitScore extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jButton1)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                        .addGap(186, 186, 186)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addComponent(jButton1)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -78,10 +92,8 @@ public class SubmitScore extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 //How do you unit test functions that depend on networks/networked data?
-        
-        submit(username, score);
-        
-        this.dispose(); //close window
+        submit(username,score);
+        jButton1.setEnabled(false); //Disables submit button once already submitted score
         
        try {//open and render current highscores
        new HighScoreInterface().setVisible(true);  
@@ -91,6 +103,10 @@ public class SubmitScore extends javax.swing.JFrame {
                        Logger.getLogger(HighScoreInterface.class.getName()).log(Level.SEVERE, null, ex);
                    }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        super.dispose();//Close this window
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
      /**
@@ -123,6 +139,7 @@ public class SubmitScore extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
