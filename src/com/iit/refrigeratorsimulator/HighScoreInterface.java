@@ -11,17 +11,19 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author m
+ * @author mihai
  */
 public class HighScoreInterface extends javax.swing.JFrame {
-
+//How do you unit test functions that depend on networks/networked data?
       
     /**
      * Renders a high score listing
      */
     public HighScoreInterface() throws SQLException, ClassNotFoundException {
         initComponents(); //Initialize highscore window
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE); //Prevents closing of entire program when closing highscore window
+        
         getScores();//pull and display scores from server.
     }
     
@@ -92,21 +94,25 @@ public class HighScoreInterface extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+     
+    /**
+     * Connects to database, executes query to return high scores ordered from high to low and outputs to jTextArea2
+     */
     private void getScores() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url ="jdbc:mysql://datafridge.ccgxxpmdysxb.us-east-1.rds.amazonaws.com:3306/highscore";
+            String url ="jdbc:mysql://datafridge.ccgxxpmdysxb.us-east-1.rds.amazonaws.com:3306/highscore";//Database location
                
-             Connection con =
-             DriverManager.getConnection(
-             url,"mbadescu", "123123123");
-              Statement stmt;
+            Connection con =//Setting up connection
+            DriverManager.getConnection(
+            url,"mbadescu", "123123123");
+              
+            Statement stmt;
 
-                stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("Select * from scores ORDER BY score DESC;");
+            stmt = con.createStatement(); // Create and execute statement to pull scores
+            ResultSet rs = stmt.executeQuery("Select * from scores ORDER BY score DESC;");
                 
-                while (rs.next()){
+            while (rs.next()){ //Iterate through the scores
                 String username = rs.getString("username");
                 int score2 = rs.getInt("score");
                
@@ -129,4 +135,6 @@ public class HighScoreInterface extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
+
+
 }

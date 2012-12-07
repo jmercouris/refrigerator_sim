@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author m
+ * @author mihai
  */
 public class SubmitScore extends javax.swing.JFrame { 
     String username;
@@ -19,7 +19,7 @@ public class SubmitScore extends javax.swing.JFrame {
      */
     public SubmitScore(String username, int score) {
         initComponents();
-         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE); //prevents entire program from closing if this window closes
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE); //prevents entire program from closing if this window closes
         this.username = username;
         this.score = score;
         jLabel1.setText("Congratulations " + username + "\n your score is " + score);
@@ -77,7 +77,8 @@ public class SubmitScore extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+//How do you unit test functions that depend on networks/networked data?
+        
         submit(username, score);
         
         this.dispose(); //close window
@@ -92,25 +93,27 @@ public class SubmitScore extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
-    
+     /**
+     *  Connects to mysql server and executes a query to add a username/score pair.
+     */
     public static void submit(String username, int score){
         
- try {
- Statement stmt;
+        try {
+        Statement stmt; //MYSQL statement
  
-  Class.forName("com.mysql.jdbc.Driver");
-   String url ="jdbc:mysql://datafridge.ccgxxpmdysxb.us-east-1.rds.amazonaws.com:3306/highscore";
+        Class.forName("com.mysql.jdbc.Driver");
+        String url ="jdbc:mysql://datafridge.ccgxxpmdysxb.us-east-1.rds.amazonaws.com:3306/highscore";//database location
    
- Connection con =
- DriverManager.getConnection(
- url,"mbadescu", "123123123");
+        Connection con = // Setting up connection
+        DriverManager.getConnection(
+        url,"mbadescu", "123123123");
  
- stmt = con.createStatement();
+        stmt = con.createStatement();
 
- stmt.executeUpdate(
- "INSERT INTO scores values ('"+ username + "','" + score + "');");  //Submit score
+        stmt.executeUpdate(
+                "INSERT INTO scores values ('"+ username + "','" + score + "');");  //Submit score
 
- con.close();    
+        con.close();    
  
  }catch( Exception e ) {
  e.printStackTrace();
